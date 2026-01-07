@@ -1,0 +1,86 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.app-header {
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.app-header h1 {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.app-container {
+  display: flex;
+  flex: 1;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.right-panel {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .left-panel {
+    width: 100%;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .left-panel > * {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .left-panel {
+    flex-direction: column;
+  }
+
+  .left-panel > * {
+    flex: unset;
+  }
+
+  .app-header {
+    padding: 1.5rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+}
