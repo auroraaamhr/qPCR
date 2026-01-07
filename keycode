@@ -1,0 +1,33 @@
+// Function to generate biologically plausible qPCR amplification curve
+const generateAmplificationCurve = (baselineValue, threshold, cycleThreshold, maxValue, noise = 0.02) => {
+  const data = [];
+  
+  for (let cycle = 1; cycle <= 45; cycle++) {
+    // Create the typical sigmoidal curve shape for qPCR
+    let value;
+    
+    if (cycle < cycleThreshold - 5) {
+      // Baseline region with small random noise
+      value = baselineValue + (Math.random() * noise - noise/2);
+    } else if (cycle >= cycleThreshold - 5 && cycle <= cycleThreshold + 10) {
+      // Exponential and plateau phase
+      const distanceFromCt = cycle - cycleThreshold;
+      const sigmoidValue = 1 / (1 + Math.exp(-distanceFromCt));
+      value = baselineValue + (maxValue - baselineValue) * sigmoidValue;
+      // Add some noise
+      value += (Math.random() * noise - noise/2) * value;
+    } else {
+      // Plateau region with small fluctuations
+      value = maxValue * (0.95 + Math.random() * 0.1);
+    }
+    
+    data.push({
+      cycle,
+      value: Number(value.toFixed(3)),
+      threshold,
+    });
+  }
+  
+  return data;
+};
+                
